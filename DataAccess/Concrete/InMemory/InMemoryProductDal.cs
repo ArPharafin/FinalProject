@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -14,11 +15,11 @@ namespace DataAccess.Concrete.InMemory
         {
              //Oracle,Sql Server,Postgres,MongoDB
             _products = new List<Product> {
-            new Product{ProductID=1,CategoryID=1,ProductName="Sapka",UnitInPrice=22,UnitsInStock=15},
-            new Product{ProductID=2,CategoryID=1,ProductName="Kamera",UnitInPrice=25,UnitsInStock=18},
-            new Product{ProductID=3,CategoryID=2,ProductName="Tablet",UnitInPrice=21,UnitsInStock=13},
-            new Product{ProductID=4,CategoryID=3,ProductName="Bumerang",UnitInPrice=26,UnitsInStock=10},
-            new Product{ProductID=5,CategoryID=4,ProductName="Halat",UnitInPrice=24,UnitsInStock=11}, 
+            new Product{ProductID=1,CategoryID=1,ProductName="Sapka",UnitPrice=22,UnitsInStock=15},
+            new Product{ProductID=2,CategoryID=1,ProductName="Kamera",UnitPrice=25,UnitsInStock=18},
+            new Product{ProductID=3,CategoryID=2,ProductName="Tablet",UnitPrice=21,UnitsInStock=13},
+            new Product{ProductID=4,CategoryID=3,ProductName="Bumerang",UnitPrice=26,UnitsInStock=10},
+            new Product{ProductID=5,CategoryID=4,ProductName="Halat",UnitPrice=24,UnitsInStock=11}, 
             };
         }
         public void Add(Product product)
@@ -42,9 +43,19 @@ namespace DataAccess.Concrete.InMemory
             _products.Remove(productToDelete);
         }
 
+        public Product Get(Expression<Func<Product, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Product> GetAll()
         {
             return _products;
+        }
+
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Product> GetAllByCategory(int categoryID)
@@ -59,7 +70,7 @@ namespace DataAccess.Concrete.InMemory
             Product productToUpdate= _products.SingleOrDefault(p => p.ProductID == product.ProductID);
             productToUpdate.ProductName = product.ProductName;
             productToUpdate.CategoryID= product.CategoryID;
-            productToUpdate.UnitInPrice= product.UnitInPrice;
+            productToUpdate.UnitPrice= product.UnitPrice;
             productToUpdate.UnitsInStock= product.UnitsInStock;
            
 
